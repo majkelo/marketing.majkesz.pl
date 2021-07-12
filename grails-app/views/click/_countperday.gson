@@ -1,0 +1,10 @@
+import com.adverity.marketing.data.DailyStats
+
+model {
+	List<DailyStats> countperday
+}
+
+json {
+	date countperday.first().date
+	clicksCount countperday.sum { it.clicks}
+}

@@ -1,0 +1,8 @@
+import com.adverity.marketing.Datasource
+import com.adverity.marketing.data.DailyStats
+
+model {
+	DailyStats dailyStats
+}
+
+json g.render(dailyStats, [excludes: ['impressions'], deep: params.deep])

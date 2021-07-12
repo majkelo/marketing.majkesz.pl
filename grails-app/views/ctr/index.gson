@@ -1,0 +1,10 @@
+import com.adverity.marketing.data.DailyStats
+
+model {
+	Iterable<DailyStats> dailyStatsList
+}
+
+json {
+	data tmpl.ctr(dailyStatsList ?: [])
+}
+

@@ -1,0 +1,10 @@
+import com.adverity.marketing.Campaign
+
+model {
+	Iterable<Campaign> campaignList
+}
+
+json {
+	data tmpl.campaign(campaignList ?: [])
+}
+

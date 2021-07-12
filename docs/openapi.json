@@ -1,0 +1,969 @@
+{
+  "openapi": "3.0.1",
+  "tags": [
+    {
+      "name": "Campaign",
+      "description": "Campaign API"
+    },
+    {
+      "name": "Click",
+      "description": "Click API"
+    },
+    {
+      "name": "CTR",
+      "description": "CTR (ClickThroughRate) API"
+    },
+    {
+      "name": "Datasource",
+      "description": "Databases API"
+    },
+    {
+      "name": "Impression",
+      "description": "Impression API"
+    },
+    {
+      "name": "OpenApi",
+      "description": "The OpenAPI v3 api document controller"
+    }
+  ],
+  "paths": {
+    "/ctr": {
+      "get": {
+        "tags": [
+          "CTR"
+        ],
+        "summary": "List CTRs (ClickThroughRate)",
+        "description": "Show specific CTR (ClickThroughRate)",
+        "operationId": "/ctr/index",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/com.adverity.marketing.data.CTR"
+                      }
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "campaign",
+            "description": "Filter by campaign id which should be related to specific CTR"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "description": "Filter by datasource id which should be related to specific CTR",
+            "name": "datasource"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2020-01-31"
+            },
+            "in": "query",
+            "name": "startDate",
+            "description": "Filter by date (date should be equal or after specific param)"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "2020-01-31",
+              "format": "date"
+            },
+            "in": "query",
+            "name": "endDate",
+            "description": "Filter by date (date should be equal or before specific param)"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "count",
+            "description": "Counts specific CTRs"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "countPerDay",
+            "description": "Aggregate CTRs per day "
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "id"
+            },
+            "in": "query",
+            "name": "sort",
+            "description": "Sort by specific value"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "asc",
+              "example": "desc"
+            },
+            "in": "query",
+            "name": "order",
+            "description": "Sort order"
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/ctr/{id}": {
+      "get": {
+        "tags": [
+          "CTR"
+        ],
+        "summary": "Show CTR (ClickThroughRate)",
+        "description": "Show specific CTR (ClickThroughRate)",
+        "operationId": "/ctr/show",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/com.adverity.marketing.data.CTR"
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "dailyStats id with CTR details"
+        }
+      ]
+    },
+    "/impression": {
+      "get": {
+        "summary": "List Impressions",
+        "description": "Show specific Impressions",
+        "operationId": "/impression/index",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/com.adverity.marketing.data.Impression"
+                      }
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "campaign",
+            "description": "Filter by campaign id which should be related to specific Impression"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "description": "Filter by datasource id which should be related to specific Impression",
+            "name": "datasource"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2020-01-31"
+            },
+            "in": "query",
+            "name": "startDate",
+            "description": "Filter by date (date should be equal or after specific param)"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2020-01-31"
+            },
+            "in": "query",
+            "name": "endDate",
+            "description": "Filter by date (date should be equal or before specific param)"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "count",
+            "description": "Counts specific Impressions"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "countPerDay",
+            "description": "Aggregate Impressions per day "
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "id"
+            },
+            "in": "query",
+            "name": "sort",
+            "description": "Sort by specific value"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "asc",
+              "example": "desc"
+            },
+            "in": "query",
+            "name": "order",
+            "description": "Sort order"
+          }
+        ],
+        "tags": [
+          "Impression"
+        ]
+      },
+      "parameters": []
+    },
+    "/impression/{id}": {
+      "get": {
+        "tags": [
+          "Impression"
+        ],
+        "summary": "Show impression",
+        "description": "Show specific impression",
+        "operationId": "/impression/show",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "default": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/com.adverity.marketing.data.Impression"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "no content": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "dailyStats id with impressions details"
+        }
+      ]
+    },
+    "/click": {
+      "get": {
+        "summary": "List Clicks",
+        "description": "Show specific Clicks",
+        "operationId": "/click/index",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/com.adverity.marketing.data.Click"
+                      }
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "campaign",
+            "description": "Filter by campaign id which should be related to specific Click"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "description": "Filter by datasource id which should be related to specific Click",
+            "name": "datasource"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2020-01-31"
+            },
+            "in": "query",
+            "name": "startDate",
+            "description": "Filter by date (date should be equal or after specific param)"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2020-01-31"
+            },
+            "in": "query",
+            "name": "endDate",
+            "description": "Filter by date (date should be equal or before specific param)"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "count",
+            "description": "Counts specific Clicks"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "countPerDay",
+            "description": "Aggregate Clicks per day "
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "id"
+            },
+            "in": "query",
+            "name": "sort",
+            "description": "Sort by specific value"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "asc",
+              "example": "desc"
+            },
+            "in": "query",
+            "name": "order",
+            "description": "Sort order"
+          }
+        ],
+        "tags": [
+          "Click"
+        ]
+      },
+      "parameters": []
+    },
+    "/click/{id}": {
+      "get": {
+        "tags": [
+          "Click"
+        ],
+        "summary": "Show click details",
+        "description": "Show specific click",
+        "operationId": "/click/show",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path",
+            "description": "click id",
+            "required": true,
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "default": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/com.adverity.marketing.data.Click"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "no content": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "dailyStats id with clicks details"
+        }
+      ]
+    },
+    "/datasource/{id}": {
+      "get": {
+        "tags": [
+          "Datasource"
+        ],
+        "summary": "Show datasource",
+        "description": "Show specific datasource",
+        "operationId": "/datasource/show",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "default": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/com.adverity.marketing.Datasource"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "no content": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "datasource id"
+        }
+      ]
+    },
+    "/campaign/{id}": {
+      "get": {
+        "tags": [
+          "Campaign"
+        ],
+        "summary": "Show campaign",
+        "description": "Show specific campaign",
+        "operationId": "/campaign/show",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "default": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/com.adverity.marketing.Campaign"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "no content": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "campaign id"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "com.adverity.marketing.data.Click": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "clicks": {
+            "type": "number"
+          },
+          "date": {
+            "type": "string",
+            "minLength": 1
+          },
+          "campaign": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "datasource": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "id",
+                  "name"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "id",
+              "datasource",
+              "name"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "clicks",
+          "date",
+          "campaign"
+        ],
+        "x-examples": {
+          "example-1": {
+            "id": 2,
+            "clicks": 10,
+            "date": "2019-11-13T00:00:00Z",
+            "campaign": {
+              "id": 1,
+              "datasource": {
+                "id": 1,
+                "name": "Google Ads"
+              },
+              "name": "Adventmarkt Touristik"
+            },
+            "value": {
+              "id": 2,
+              "clicks": 10,
+              "date": "2019-11-13T00:00:00Z",
+              "campaign": {
+                "id": 1,
+                "datasource": {
+                  "id": 1,
+                  "name": "Google Ads"
+                },
+                "name": "Adventmarkt Touristik"
+              }
+            }
+          }
+        }
+      },
+      "com.adverity.marketing.data.Impression": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "date": {
+            "type": "string",
+            "minLength": 1
+          },
+          "campaign": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "datasource": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "id",
+                  "name"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "id",
+              "datasource",
+              "name"
+            ]
+          },
+          "impressions": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "date",
+          "campaign",
+          "impressions"
+        ],
+        "x-examples": {
+          "example-1": {
+            "id": 2,
+            "date": "2019-11-13T00:00:00Z",
+            "campaign": {
+              "id": 1,
+              "datasource": {
+                "id": 1,
+                "name": "Google Ads"
+              },
+              "name": "Adventmarkt Touristik"
+            },
+            "impressions": 20,
+            "value": {
+              "id": 2,
+              "date": "2019-11-13T00:00:00Z",
+              "campaign": {
+                "id": 1,
+                "datasource": {
+                  "id": 1,
+                  "name": "Google Ads"
+                },
+                "name": "Adventmarkt Touristik"
+              },
+              "impressions": 20
+            }
+          }
+        }
+      },
+      "com.adverity.marketing.data.CTR": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "clicks": {
+            "type": "number"
+          },
+          "date": {
+            "type": "string",
+            "minLength": 1
+          },
+          "campaign": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "datasource": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "id",
+                  "name"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "id",
+              "datasource",
+              "name"
+            ]
+          },
+          "impressions": {
+            "type": "number"
+          },
+          "ctr": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "clicks",
+          "date",
+          "campaign",
+          "impressions",
+          "ctr"
+        ],
+        "x-examples": {
+          "example-1": {
+            "id": 2,
+            "clicks": 10,
+            "date": "2019-11-13T00:00:00Z",
+            "campaign": {
+              "id": 1,
+              "datasource": {
+                "id": 1,
+                "name": "Google Ads"
+              },
+              "name": "Adventmarkt Touristik"
+            },
+            "impressions": 20,
+            "ctr": 0.5,
+            "value": {
+              "id": 2,
+              "clicks": 10,
+              "date": "2019-11-13T00:00:00Z",
+              "campaign": {
+                "id": 1,
+                "datasource": {
+                  "id": 1,
+                  "name": "Google Ads"
+                },
+                "name": "Adventmarkt Touristik"
+              },
+              "impressions": 20,
+              "ctr": 0.5
+            }
+          }
+        }
+      },
+      "com.adverity.marketing.Datasource": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "x-examples": {
+          "example-1": {
+            "id": 2,
+            "name": "Twitter Ads",
+            "value": {
+              "id": 2,
+              "name": "Twitter Ads"
+            }
+          }
+        }
+      },
+      "com.adverity.marketing.Campaign": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "datasource": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "datasource",
+          "name"
+        ],
+        "x-examples": {
+          "example-1": {
+            "id": 2,
+            "datasource": {
+              "id": 2,
+              "name": "Twitter Ads"
+            },
+            "name": "Adventmarkt Touristik",
+            "value": {
+              "id": 2,
+              "datasource": {
+                "id": 2,
+                "name": "Twitter Ads"
+              },
+              "name": "Adventmarkt Touristik"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {}
+  },
+  "info": {
+    "title": "marketing.majkesz.pl",
+    "contact": {
+      "name": "Mike Szulc",
+      "email": "majkesz@majkesz.pl"
+    },
+    "description": "OpenAPI for marketing endpoints; recruitment purposes",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://marketing.majkesz.pl",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+import com.adverity.marketing.data.DailyStats
+
+model {
+	DailyStats dailyStats
+}
+
+json g.render(dailyStats, [deep: params.deep]){
+	ctr dailyStats.CTR
+}

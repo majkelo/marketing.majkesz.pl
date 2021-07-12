@@ -1,0 +1,10 @@
+import com.adverity.marketing.Datasource
+
+model {
+	Iterable<Datasource> datasourceList
+}
+
+json {
+	data tmpl.datasource(datasourceList ?: [])
+}
+

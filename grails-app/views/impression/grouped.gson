@@ -1,0 +1,9 @@
+
+model {
+	Collection groupedDailyStatsList
+}
+
+json {
+	data tmpl.countperday(groupedDailyStatsList)
+}
+

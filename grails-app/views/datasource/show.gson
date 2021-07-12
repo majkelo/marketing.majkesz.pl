@@ -1,0 +1,9 @@
+import com.adverity.marketing.Datasource
+
+model {
+	Datasource datasource
+}
+
+json {
+	data tmpl.datasource(datasource)
+}

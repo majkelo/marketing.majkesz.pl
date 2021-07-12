@@ -1,0 +1,7 @@
+import com.adverity.marketing.Campaign
+
+model {
+	Campaign campaign
+}
+
+json g.render(campaign, [expand: ['datasource'], resolveTemplate: false])

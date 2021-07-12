@@ -1,0 +1,16 @@
+import com.adverity.marketing.data.DailyStats
+
+model {
+	Iterable<DailyStats> dailyStatsList
+}
+
+def impressionsCounted = dailyStatsList.sum { it.impressions }
+def clicksCounted = dailyStatsList.sum { it.clicks }
+
+json {
+	data {
+		impressionsCount impressionsCounted
+		clicksCount clicksCounted
+		ctr ((impressionsCounted > 0) ? (clicksCounted / impressionsCounted) : 0)
+	}
+}
